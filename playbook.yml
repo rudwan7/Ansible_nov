@@ -5,3 +5,5 @@
   tasks:
     - name: display hello-world
       shell: echo 'hello world'
+    - name: display date
+      command: date
