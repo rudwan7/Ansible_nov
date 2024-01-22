@@ -1,3 +1,18 @@
 
 server_name: '10.23.456.6'
 package_name: 'java'
+users_create:
+    - rudwan
+    - ibt
+    - nov2023
+    - 2024
+
+packages:
+    - name: python
+      required: true
+    - name: java
+      required: true
+    - name: ruby
+      required: false
+    - name: ngnix
+      required: true

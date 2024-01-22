@@ -1,0 +1,53 @@
+---
+- name: playbook2
+  hosts: localhost
+  vars:
+    users:
+      - rudwan
+      - ibt
+      - nov2023
+      - 2024
+
+
+  tasks:
+    - include_vars: vars.yml
+    - name: run command
+      command: echo "hi"
+      register: contents
+      tags:
+        - webservers
+
+    - name: run task on basis of previous successfulll run
+      command: echo "success"
+      when: contents.stdout.find('hi')!=-1
+
+    - name: run task on basis of previous successfulll run
+      command: echo "success"
+      when: contents['changed'] == 'true'
+
+    - name: tags
+      command: echo "running using tags"
+      tags:
+        - webservers
+
+    - name: running loop
+      command: echo {{ item }}
+      loop:
+        - rudwan
+        - ibt
+        - nov2023
+        - 2024
+
+    - name: running loop on conditions
+      command: echo {{ item }}
+      loop: '{{ users }}'
+
+
+    - name: running loop on vars
+      command: echo {{ item }}
+      loop: '{{ users_create }}'
+
+    - name: running loop on conditions
+      command: echo {{ item.name }}
+      when: item.required == true
+      loop: '{{ packages }}'
